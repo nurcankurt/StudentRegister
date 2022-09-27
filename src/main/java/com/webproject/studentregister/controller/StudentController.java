@@ -39,13 +39,6 @@ public class StudentController {
         return new ResponseEntity<>(service.save(student), HttpStatus.OK);
     }
 
-  /*  @PostMapping(path = "/students/test", consumes = { MediaType.APPLICATION_JSON_VALUE,MediaType.MULTIPART_FORM_DATA_VALUE, MediaType.APPLICATION_OCTET_STREAM_VALUE })
-    public ResponseEntity<Student> test(@RequestParam("file") List<MultipartFile> file){
-        Image image = imageService.save(file.get(0));
-        return new ResponseEntity<>(null, HttpStatus.OK);
-    }*/
-
-
     @GetMapping("/students")
     public ResponseEntity<List<Student>> fetchStudents(){
         return new ResponseEntity<>(service.findAll(), HttpStatus.OK);
@@ -74,9 +67,15 @@ public class StudentController {
         return new ResponseEntity<>(service.getById(id), HttpStatus.OK);
     }
 
-   /* @GetMapping(path = "/image/{id}")
-    public ResponseEntity<Resource> getByIdImage(@PathVariable Long id){
-        return new ResponseEntity<>(ImageService.getById(id), HttpStatus.OK);
-    }*/
+   @GetMapping(path = "/images/{id}")
+    public ResponseEntity<String> getByIdImage(@PathVariable(value = "id") Long id){
+        if(service.getById(id).getImage()!=null){
+            String imageName = service.getById(id).getImage();
+            return new ResponseEntity<>(imageService.viewImage(imageName), HttpStatus.OK);
+        }else {
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        }
+
+    }
 
 }

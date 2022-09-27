@@ -11,4 +11,6 @@ public interface ImageRepository extends JpaRepository<Image,Long> {
     @Modifying
     @Transactional
     void deleteByName(String name);
+
+    Image getByName(String name);
 }
