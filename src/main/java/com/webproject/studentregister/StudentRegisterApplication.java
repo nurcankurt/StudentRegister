@@ -15,8 +15,4 @@ public class StudentRegisterApplication {
 		SpringApplication.run(StudentRegisterApplication.class, args);
 	}
 
-	/*@EventListener(ApplicationStartedEvent.class)
-	public void run(){
-
-	}*/
 }

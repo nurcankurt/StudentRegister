@@ -6,7 +6,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
-import javax.persistence.Transient;
 import javax.transaction.Transactional;
 import java.io.IOException;
 import java.util.Base64;
@@ -33,5 +32,10 @@ public class ImageService {
 
     public void delete(String imageName) {
         imageRepository.deleteByName(imageName);
+    }
+
+    public String viewImage(String imageName){
+        String data =imageRepository.getByName(imageName).getImageData();
+        return data;
     }
 }
